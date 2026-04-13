@@ -1,0 +1,171 @@
+/* ============================================================
+   TEMPLATE: MINIMAL — Clean & spacious. My Favorite!
+   ============================================================ */
+.template-minimal {
+	padding: 2.5rem 3.5rem;
+	font-family: var(--cv-font-body);
+	color: var(--cv-text);
+	font-size: var(--cv-font-size-base, 10pt);
+	line-height: var(--cv-line-height, 1.45);
+}
+
+.template-minimal .cv-header {
+	margin-bottom: var(--cv-header-margin-bottom, 1.2rem);
+}
+
+.template-minimal .cv-header .person-name {
+	font-family: var(--cv-font-heading);
+	font-size: 2em;
+	font-weight: 700;
+	color: var(--cv-text);
+	letter-spacing: -0.02em;
+}
+
+.template-minimal .cv-header .person-title {
+	font-size: 1em;
+	color: var(--cv-primary);
+	font-weight: 500;
+	margin-bottom: 0.35rem;
+	font-family: var(--cv-font-mono);
+}
+
+.template-minimal .cv-header .contact-line {
+	font-size: 0.8em;
+	color: var(--cv-text-light);
+	font-family: var(--cv-font-mono);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 0.8rem;
+}
+
+.template-minimal .cv-header .photo-container {
+	width: 65px;
+	height: 65px;
+	border-radius: 4px;
+	overflow: hidden;
+	float: right;
+	margin-left: 1rem;
+}
+
+.template-minimal .cv-header .photo-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.template-minimal .section-title {
+	font-size: 0.75em;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	color: var(--cv-primary);
+	margin-top: var(--cv-section-margin-top, 1rem);
+	margin-bottom: var(--cv-section-margin-bottom, 0.5rem);
+	font-family: var(--cv-font-mono);
+}
+
+.template-minimal .section-title::after {
+	content: '';
+	display: block;
+	width: 30px;
+	height: 2px;
+	background: var(--cv-primary);
+	margin-top: 0.2rem;
+}
+
+.template-minimal .summary-text {
+	font-size: 0.9em;
+}
+
+.template-minimal .experience-item,
+.template-minimal .education-item,
+.template-minimal .project-item,
+.template-minimal .volunteer-item {
+	margin-bottom: var(--cv-item-margin-bottom, 0.6rem);
+}
+
+.template-minimal .item-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+
+.template-minimal .item-primary {
+	font-weight: 600;
+	font-size: 0.95em;
+}
+
+.template-minimal .item-secondary {
+	color: var(--cv-text-light);
+	font-size: 0.9em;
+}
+
+.template-minimal .item-date {
+	font-size: 0.75em;
+	color: var(--cv-text-light);
+	font-family: var(--cv-font-mono);
+}
+
+.template-minimal .item-bullets {
+	list-style: none;
+	margin-top: 0.15rem;
+	font-size: 0.9em;
+}
+
+.template-minimal .item-bullets li {
+	position: relative;
+	padding-left: 0.8rem;
+	margin-bottom: 0.08rem;
+}
+
+.template-minimal .item-bullets li::before {
+	content: '—';
+	position: absolute;
+	left: 0;
+	color: var(--cv-primary);
+	font-size: 0.7em;
+}
+
+.template-minimal .skills-group {
+	margin-bottom: 0.3rem;
+	font-size: 0.9em;
+}
+
+.template-minimal .skills-group-label {
+	font-weight: 600;
+	font-family: var(--cv-font-mono);
+	font-size: 0.85em;
+}
+
+.template-minimal .links-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	font-size: 0.8em;
+	font-family: var(--cv-font-mono);
+}
+
+.template-minimal .link-item-label {
+	font-weight: 600;
+	color: var(--cv-primary);
+}
+
+.template-minimal .cert-item,
+.template-minimal .award-item,
+.template-minimal .publication-item,
+.template-minimal .language-item,
+.template-minimal .reference-item,
+.template-minimal .custom-item {
+	margin-bottom: 0.3rem;
+	font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+	.template-minimal {
+		padding: 1.5rem 2rem;
+	}
+
+	.template-minimal .cv-header .person-name {
+		font-size: 1.6em;
+	}
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuitUp — Free Resume & CV Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:wght@400;500;600;700&family=Fira+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Karla:wght@400;500;600;700&family=Lato:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+
+<body>
+
+  <!-- Notification Container -->
+  <div class="notification-container" id="notificationContainer"></div>
+
+  <!-- Confirm Dialog -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-dialog">
+      <h3 id="confirmTitle">Are you sure?</h3>
+      <p id="confirmMessage">This action cannot be undone.</p>
+      <div class="confirm-dialog-actions">
+        <button class="button-secondary" id="confirmCancelButton">Cancel</button>
+        <button class="button-primary button-danger" id="confirmOkButton">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-view" id="dashboardView">
+    <div class="dashboard-header">
+      <h1>Suit<span>Up</span></h1>
+      <p>Build professional resumes and cover letters | free, private, no signup.</p>
+      <div class="storage-indicator">
+        <span id="storageLabel">Storage: 0 KB / 5 MB</span>
+        <div class="storage-bar">
+          <div class="storage-bar-fill" id="storageBarFill" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profiles-grid" id="profilesGrid">
+      <div class="create-profile-card" id="createProfileCard">
+        <div class="create-profile-card-icon">+</div>
+        <span>Create New Resume</span>
+      </div>
+      <div class="create-profile-card" id="importProfileCard">
+        <div class="create-profile-card-icon">📥</div>
+        <span>Import JSON Backup</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="editor-view" id="editorView">
+    <!-- Top Bar -->
+    <div class="editor-top-bar">
+      <div class="editor-top-bar-left">
+        <button class="back-to-dashboard-button" id="backToDashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Profiles
+        </button>
+        <input type="text" class="editor-profile-name" id="editorProfileName" value="Untitled Resume">
+      </div>
+      <div class="editor-top-bar-right">
+        <button class="editor-tab-button active" data-tab="resume" id="tabResume">Resume</button>
+        <button class="editor-tab-button" data-tab="coverLetter" id="tabCoverLetter">Cover Letter</button>
+      </div>
+    </div>
+
+    <!-- Resume Canvas -->
+    <div class="resume-canvas-wrapper" id="resumeCanvasWrapper">
+      <div class="resume-canvas" id="resumeCanvas"></div>
+      <div class="add-section-panel" id="addSectionPanel">
+        <h3>Add a Section</h3>
+        <div class="add-section-options" id="addSectionOptions"></div>
+      </div>
+    </div>
+
+    <!-- Cover Letter Canvas -->
+    <div class="resume-canvas-wrapper" id="coverLetterCanvasWrapper" style="display:none;">
+      <div class="resume-canvas" id="coverLetterCanvas"></div>
+    </div>
+
+    <!-- Ghost Bar — floating bottom toolbar -->
+    <div class="ghost-bar" id="ghostBar">
+      <button class="ghost-bar-button" id="ghostBarTemplate" title="Change Template & Colors">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Template</span>
+      </button>
+      <button class="ghost-bar-button" id="ghostBarAddSection" title="Add Section">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Add Section</span>
+      </button>
+      <div class="ghost-bar-divider"></div>
+      <button class="ghost-bar-button" id="ghostBarExport" title="Export">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Export</span>
+      </button>
+      <button class="ghost-bar-button" id="ghostBarPrint" title="Print">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        <span>Print</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="template-picker-overlay" id="templatePickerOverlay">
+    <div class="template-picker-panel">
+      <h2>Template & Appearance</h2>
+
+      <div class="template-options" id="templateOptions">
+        <div class="template-option selected" data-template="classic">
+          <div class="template-option-preview">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><rect width="60" height="80" fill="#fef9f5" rx="2"/><rect x="15" y="6" width="30" height="4" rx="1" fill="#d4603e"/><rect x="20" y="13" width="20" height="2" rx="1" fill="#a8a29e"/><line x1="8" y1="20" x2="52" y2="20" stroke="#d4603e" stroke-width="0.5"/><rect x="8" y="25" width="15" height="2" rx="1" fill="#d4603e"/><rect x="8" y="30" width="44" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="34" width="40" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="38" width="42" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="46" width="18" height="2" rx="1" fill="#d4603e"/><rect x="8" y="51" width="44" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="55" width="38" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="63" width="14" height="2" rx="1" fill="#d4603e"/><rect x="8" y="68" width="44" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="72" width="36" height="1.5" rx="0.75" fill="#e7e5e2"/></svg>
+          </div>
+          <div class="template-option-name">Classic</div>
+          <div class="template-option-desc">Traditional single-column</div>
+        </div>
+        <div class="template-option" data-template="modern">
+          <div class="template-option-preview">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><rect width="60" height="80" fill="#fef9f5" rx="2"/><rect width="20" height="80" fill="#d4603e" rx="2"/><rect x="4" y="8" width="12" height="3" rx="1" fill="white"/><rect x="4" y="14" width="10" height="1.5" rx="0.75" fill="rgba(255,255,255,0.6)"/><rect x="4" y="22" width="8" height="1.5" rx="0.75" fill="rgba(255,255,255,0.5)"/><rect x="4" y="26" width="12" height="1.5" rx="0.75" fill="rgba(255,255,255,0.5)"/><rect x="24" y="8" width="16" height="2" rx="1" fill="#d4603e"/><rect x="24" y="14" width="32" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="24" y="18" width="28" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="24" y="26" width="18" height="2" rx="1" fill="#d4603e"/><rect x="24" y="31" width="32" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="24" y="35" width="28" height="1.5" rx="0.75" fill="#e7e5e2"/></svg>
+          </div>
+          <div class="template-option-name">Modern</div>
+          <div class="template-option-desc">Two-column sidebar</div>
+        </div>
+        <div class="template-option" data-template="minimal">
+          <div class="template-option-preview">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none"><rect width="60" height="80" fill="#fef9f5" rx="2"/><rect x="8" y="8" width="28" height="5" rx="1" fill="#292524"/><rect x="8" y="16" width="18" height="2" rx="1" fill="#d4603e" opacity="0.7"/><rect x="8" y="21" width="25" height="1.5" rx="0.75" fill="#a8a29e"/><rect x="8" y="29" width="10" height="1.5" rx="0.75" fill="#d4603e"/><rect x="8" y="36" width="44" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="40" width="40" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="48" width="12" height="1.5" rx="0.75" fill="#d4603e"/><rect x="8" y="55" width="44" height="1.5" rx="0.75" fill="#e7e5e2"/><rect x="8" y="59" width="38" height="1.5" rx="0.75" fill="#e7e5e2"/></svg>
+          </div>
+          <div class="template-option-name">Minimal</div>
+          <div class="template-option-desc">Clean & spacious</div>
+        </div>
+      </div>
+
+      <div class="color-customization">
+        <h3>Color Scheme</h3>
+        <div class="color-presets" id="colorPresets"></div>
+        <div class="custom-color-row">
+          <label>Primary</label>
+          <input type="color" id="customPrimaryColor" value="#d4603e">
+        </div>
+        <div class="custom-color-row">
+          <label>Accent</label>
+          <input type="color" id="customAccentColor" value="#eda08a">
+        </div>
+      </div>
+
+      <div class="date-format-section">
+        <h3>Date Format</h3>
+        <div class="date-format-options" id="dateFormatOptions"></div>
+      </div>
+
+      <div class="typography-section">
+        <h3>Typography</h3>
+        <div class="typography-row">
+          <label>Heading Font</label>
+          <select id="fontHeadingSelect" class="font-select"></select>
+        </div>
+        <div class="typography-row">
+          <label>Body Font</label>
+          <select id="fontBodySelect" class="font-select"></select>
+        </div>
+        <div class="typography-row">
+          <label>Font Size</label>
+          <div class="size-slider-row">
+            <input type="range" id="fontSizeSlider" min="8" max="13" step="0.5" value="10">
+            <span id="fontSizeLabel" class="size-label">10pt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacing-section">
+        <h3>Spacing Density</h3>
+        <div class="spacing-options" id="spacingOptions">
+          <button class="spacing-option" data-spacing="compact">Compact</button>
+          <button class="spacing-option selected" data-spacing="default">Default</button>
+          <button class="spacing-option" data-spacing="comfortable">Comfortable</button>
+        </div>
+      </div>
+
+      <div class="template-picker-actions">
+        <button class="button-secondary" id="templatePickerCancel">Cancel</button>
+        <button class="button-primary" id="templatePickerApply">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-overlay" id="exportOverlay">
+    <div class="export-panel">
+      <h2>Export Your Resume</h2>
+      <p>Choose a format to download or share your resume.</p>
+      <div class="export-options">
+        <button class="export-option-button" id="exportPdf">
+          <div class="export-option-icon">PDF</div>
+          <div class="export-option-info">
+            <h4>PDF Document</h4>
+            <p>Best for sharing and printing</p>
+          </div>
+        </button>
+        <button class="export-option-button" id="exportHtml">
+          <div class="export-option-icon">HTML</div>
+          <div class="export-option-info">
+            <h4>HTML File</h4>
+            <p>Self-contained web page</p>
+          </div>
+        </button>
+        <button class="export-option-button" id="exportJson">
+          <div class="export-option-icon">JSON</div>
+          <div class="export-option-info">
+            <h4>JSON Backup</h4>
+            <p>Save & restore your data</p>
+          </div>
+        </button>
+      </div>
+      <button class="export-close-button" id="exportClose">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Hidden file input for JSON import -->
+  <input type="file" id="jsonImportInput" accept=".json" style="display:none">
+
+</body>
+</html>
