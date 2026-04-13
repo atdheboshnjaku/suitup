@@ -48,6 +48,7 @@ registerExporter('pdf', {
 		};
 
 		try {
+			window.scrollTo(0, 0);
 			await window.html2pdf().from(canvasElement).set(pdfOptions).save();
 			showNotification('PDF downloaded!');
 		} catch (exportError) {
