@@ -43,7 +43,23 @@ registerExporter('pdf', {
 			margin: 0,
 			filename: `${profileData.name || 'resume'}.pdf`,
 			image: { type: 'jpeg', quality: 0.98 },
-			html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, scrollX: 0 },
+			html2canvas: {
+				scale: 2,
+				useCORS: true,
+				letterRendering: true,
+				scrollY: 0,
+				scrollX: 0,
+				onclone: (clonedDocument) => {
+					clonedDocument.querySelectorAll('.cv-section').forEach(section => {
+						section.style.border = 'none';
+						section.style.borderRadius = '0';
+						section.style.boxShadow = 'none';
+					});
+					clonedDocument.querySelectorAll('.section-hover-hint').forEach(hint => {
+						hint.style.display = 'none';
+					});
+				}
+			},
 			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
 		};
 
