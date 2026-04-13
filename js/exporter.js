@@ -29,7 +29,7 @@ registerExporter('pdf', {
 		if (!window.html2pdf) {
 			try {
 				await loadExternalScript(
-				'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
+				'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.12.1/html2pdf.bundle.min.js'
 				);
 			} catch (loadError) {
 				showNotification('Could not load PDF library. Try the Print option instead.');
