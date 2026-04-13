@@ -64,6 +64,7 @@ registerExporter('pdf', {
 				}
 			},
 			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+			pagebreak: { mode: 'avoid-all' },
 		};
 
 		try {
