@@ -51,13 +51,16 @@ registerExporter('pdf', {
 				scrollX: 0,
 				onclone: (clonedDocument) => {
 					clonedDocument.querySelectorAll('.cv-section').forEach(section => {
-						section.style.border = 'none';
-						section.style.borderRadius = '0';
-						section.style.boxShadow = 'none';
+						section.style.cssText += 'border: none !important; border-radius: 0 !important; box-shadow: none !important;';
 					});
 					clonedDocument.querySelectorAll('.section-hover-hint').forEach(hint => {
-						hint.style.display = 'none';
+						hint.style.cssText += 'display: none !important;';
 					});
+					clonedDocument.querySelectorAll('.page-overflow-indicator').forEach(indicator => {
+						indicator.style.cssText += 'display: none !important;';
+					});
+					const canvas = clonedDocument.querySelector('.resume-canvas');
+					if (canvas) canvas.style.cssText += 'min-height: 0 !important; box-shadow: none !important;';
 				}
 			},
 			jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
