@@ -1,40 +1,37 @@
-# SuitUp ⚡
-### Free Resume & CV Builder — No Login, No BS
+# SuitUp
+### Free Resume & CV Builder — Fast, Simple, Private
 
-SuitUp is a lightweight, browser based resume builder designed for speed and simplicity.
+SuitUp is a lightweight, browser-based resume builder designed to get out of your way.
 
-No accounts. No subscriptions. No unnecessary steps.
-Just open it, build your CV, and export.
+Create a clean, professional CV in minutes — without signing up or handing over your data.
+
+No login. No setup.
+
+Open it, build your CV, and export.
 
 ---
 
 ## 🚀 Features
 
-- ⚡ Instant CV creation in the browser
-- 💾 Auto save using localStorage (no login required)
-- 🎨 Multiple templates (classic, modern, minimal)
-- ✏️ Inline editing experience
-- 📄 Export to PDF / HTML / JSON
-- 🔄 Live preview while editing
-- 📝 Cover letter builder included!
-- 👤 Multiple profiles for different job applications
-
----
-
-SuitUp is built differently:
-
-> fast, simple, and actually FREE
-
----
+- ⚡ Create your CV instantly in the browser
+- 💾 Auto-saves locally (no account required)
+- 🔄 Live preview as you edit
+- 📄 Export to PDF, HTML, or JSON
+- 👤 Multiple profiles for different applications
+- 📥 Import CVs from previously exported JSON files
+- ✏️ Inline editing — just type, no forms
+- 🎨 Clean templates (classic, modern, minimal)
+- 📝 Built-in cover letter builder
 
 ## 🛠️ Tech Stack
 
 - HTML5/CSS3
 - JavaScript
 
-No frameworks. No backend. No dependencies.
+No frameworks. No backend.
+Everything runs in your browser.
 
 ---
 
-## 🌍 Use it now!
+## Get started
 👉 https://atdheboshnjaku.github.io/suitup/
